@@ -1,5 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using MySqlConnector;
 using Proyecto4.Clases;
 using System;
 using System.Collections.Generic;
@@ -104,30 +103,7 @@ namespace Proyecto4.GestionBD
         }
 
 
-        public void EliminarPedido(int idPedido)
-        {
-            using (MySqlConnection connection = EstablecerConexion())
-            {
-                try
-                {
-                    AbrirConexion(connection);
 
-                    MySqlCommand cmd = new MySqlCommand("Eliminar_Pedido", connection);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("p_idPedido", idPedido);
-
-                    cmd.ExecuteNonQuery();
-                }
-                catch (MySqlException err)
-                {
-                    Console.WriteLine($"Ocurrió un error: {err.Message}");
-                }
-                finally
-                {
-                    CerrarConexion(connection);
-                }
-            }
-        }
 
         public string ActualizarPedido(int IdPedido, string cedulaClientePide, string estado, DateTime fechaPedido, string nombreCliente)
         {
